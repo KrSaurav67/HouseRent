@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -6,11 +7,17 @@ import authRouter from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import listingRouter from "./routes/listing.route.js";
 import path from "path";
+import jwt from 'jsonwebtoken'
 
-dotenv.config();
 
+dotenv.config({ path: "./.env" });
+const JWT_SECRET = process.env.JWT_SECRET;
+// const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+
+
+console.log("Loaded MONGO_URI:", process.env.MONGO_URI);
 mongoose
-  .connect(process.env.MONGO)
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -23,6 +30,11 @@ const __dirname = path.resolve();
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}))
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");

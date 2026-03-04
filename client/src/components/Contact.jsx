@@ -1,15 +1,24 @@
 import { set } from "mongoose";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Contact = ({ listing }) => {
   const [landlord, setLandlord] = useState(null);
   const [message, setMessage] = useState("");
 
+  const { currentUser } = useSelector((state) => state.user);
+
+
   useEffect(() => {
     const fetchLandlord = async () => {
       try {
-        const res = await fetch(`/api/user/${listing.userRef}`);
+        // -const res = await fetch(`http://localhost:5173/api/user/public/${listing.userRef}`, {
+         const res = await fetch(`/api/user/${listing.userRef}`,{
+          headers: {
+            Authorization: `Bearer ${currentUser.token}`,
+          },
+         });
         const data = await res.json();
         if (data.success === false) {
           return;
@@ -21,8 +30,7 @@ const Contact = ({ listing }) => {
     };
 
     fetchLandlord();
-  }, [listing.userRef]);
-
+  }, [listing.userRef, currentUser]);
 
   const onChange = (e) => {
 
