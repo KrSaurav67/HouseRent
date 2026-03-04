@@ -89,14 +89,15 @@ Fork the repo, create a branch, make your changes, and submit a pull request.
 
 
 This project is a part of Group Project of SmartBridge.
+
 Members:-
 
 
-Saurav Kumar 
+1. Saurav Kumar 
 - Email: thesaurav6767@gmail.com
-Vaishnavi Mishra
+2. Vaishnavi Mishra
 - Email: vaishnavi.mishra67009@gmail.com
-Akshat Tiwari
+3. Akshat Tiwari
 - Email: tiwariakshat233@gmail.com
-Varun Patel
+4. Varun Patel
 - Email: varunpatel506@gmail.com
